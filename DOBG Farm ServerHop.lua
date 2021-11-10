@@ -29,7 +29,7 @@ if game.PlaceId == 4638110048 or 4195906474 or 4195907096 then
             end
             syn.queue_on_teleport([[
                 getgenv().ServerHop = true 
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/SenseiJoshy/Extras/main/DBOG%20Farm%20ServerHop.lua"))()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/SenseiJoshy/Open-Source/main/DOBG%20Farm%20ServerHop.lua"))()
             ]])
             repeat wait()
                 teleport()
