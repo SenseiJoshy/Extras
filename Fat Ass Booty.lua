@@ -97,194 +97,194 @@
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local event = game:GetService("ReplicatedStorage").Remotes.Item 
     event:InvokeServer(v1, v2)
-    local v1 = "BluntWeaponEquip9" --the weapon
+    local v1 = "BluntWeaponEquip9" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local event = game:GetService("ReplicatedStorage").Remotes.Item 
     event:InvokeServer(v1, v2)    
-    local v1 = "BluntWeaponEquip8" --the weapon
+    local v1 = "BluntWeaponEquip8" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local event = game:GetService("ReplicatedStorage").Remotes.Item 
     event:InvokeServer(v1, v2)
-    local v1 = "BluntWeaponEquip7" --the weapon
+    local v1 = "BluntWeaponEquip7" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local event = game:GetService("ReplicatedStorage").Remotes.Item 
     event:InvokeServer(v1, v2)
-    local v1 = "AccessoryEquip1" --u can do 1-36
+    local v1 = "AccessoryEquip1" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip2" --u can do 1-36
+    local v1 = "AccessoryEquip2" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip3" --u can do 1-36
+    local v1 = "AccessoryEquip3" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip4" --u can do 1-36
+    local v1 = "AccessoryEquip4" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip5" --u can do 1-36
+    local v1 = "AccessoryEquip5" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip6" --u can do 1-36
+    local v1 = "AccessoryEquip6" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip7" --u can do 1-36
+    local v1 = "AccessoryEquip7" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip8" --u can do 1-36
+    local v1 = "AccessoryEquip8" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip9" --u can do 1-36
+    local v1 = "AccessoryEquip9" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip10" --u can do 1-36
+    local v1 = "AccessoryEquip10" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip11" --u can do 1-36
+    local v1 = "AccessoryEquip11" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip12" --u can do 1-36
+    local v1 = "AccessoryEquip12"
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip13" --u can do 1-36
+    local v1 = "AccessoryEquip13" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip14" --u can do 1-36
+    local v1 = "AccessoryEquip14" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip15" --u can do 1-36
+    local v1 = "AccessoryEquip15" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip16" --u can do 1-36
+    local v1 = "AccessoryEquip16" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip17" --u can do 1-36
+    local v1 = "AccessoryEquip17" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip18" --u can do 1-36
+    local v1 = "AccessoryEquip18" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip19" --u can do 1-36
+    local v1 = "AccessoryEquip19" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip20" --u can do 1-36
+    local v1 = "AccessoryEquip20" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip21" --u can do 1-36
+    local v1 = "AccessoryEquip21" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip22" --u can do 1-36
+    local v1 = "AccessoryEquip22" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip23" --u can do 1-36
+    local v1 = "AccessoryEquip23" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip24" --u can do 1-36
+    local v1 = "AccessoryEquip24" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip25" --u can do 1-36
+    local v1 = "AccessoryEquip25" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip26" --u can do 1-36
+    local v1 = "AccessoryEquip26"
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip27" --u can do 1-36
+    local v1 = "AccessoryEquip27" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip28" --u can do 1-36
+    local v1 = "AccessoryEquip28" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip29" --u can do 1-36
+    local v1 = "AccessoryEquip29" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip30" --u can do 1-36
+    local v1 = "AccessoryEquip30" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip31" --u can do 1-36
+    local v1 = "AccessoryEquip31" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip32" --u can do 1-36
+    local v1 = "AccessoryEquip32" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip33" --u can do 1-36
+    local v1 = "AccessoryEquip33" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip34" --u can do 1-36
+    local v1 = "AccessoryEquip34" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip35" --u can do 1-36
+    local v1 = "AccessoryEquip35" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
     event:InvokeServer(v1, v2, v3)
-    local v1 = "AccessoryEquip36" --u can do 1-36
+    local v1 = "AccessoryEquip36" 
     local v2 = game:GetService("Players").LocalPlayer.Inventory.I
     local v3 = "Accessory2"
     local event = game:GetService("ReplicatedStorage").Remotes.Item
