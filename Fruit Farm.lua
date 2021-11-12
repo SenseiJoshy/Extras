@@ -19,7 +19,7 @@ if ServerHop then
         pcall(function()
             game:GetService("ReplicatedStorage").Remotes.StartUp:InvokeServer()
         end)
-        wait(2)
+        wait(5)
         for i, v in pairs(game.Workspace.Map.Trees:GetChildren()) do
             if v:IsA("Model") and v:FindFirstChild("Leaf") and v:FindFirstChild("MeshPart1") then
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Leaf.CFrame
@@ -28,7 +28,7 @@ if ServerHop then
                 wait(0.1)
             end
         end
-        wait(2)
+        wait(5)
         for i, v in pairs(game.Workspace:GetChildren()) do
             if v:IsA("Model") and v:FindFirstChild("Leaf") then
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Leaf.CFrame
