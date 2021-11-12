@@ -1,3 +1,8 @@
+--[[
+    Made By: Sensei Joshy#1060
+    Discord: https://discord.com/invite/phantomhub
+]]--
+
 if (not game:IsLoaded()) then
     game.Loaded:Wait();
 end;
