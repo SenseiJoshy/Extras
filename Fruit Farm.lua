@@ -10,7 +10,7 @@ function teleport()
     end
 end
 if ServerHop then
-    while wait(.5) do
+    while wait(6) do
         pcall(function()
             game:GetService("ReplicatedStorage").Remotes.StartUp:InvokeServer()
         end)
