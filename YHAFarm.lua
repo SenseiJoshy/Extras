@@ -1,6 +1,3 @@
-getgenv().Autopick = true -- set to false dumbass if u want to stop
-getgenv().Autofarm = true -- set to false dumbass if u want to stop
-
 coroutine.wrap(function()
     while wait() do 
         if getgenv().Autofarm then 
