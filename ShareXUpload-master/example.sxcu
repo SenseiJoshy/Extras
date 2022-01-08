@@ -1,0 +1,12 @@
+﻿{
+  "Name": "Hayden-Droid Upload",
+  "DestinationType": "ImageUploader, TextUploader, FileUploader",
+  "RequestType": "POST",
+  "RequestURL": "https://hayden-droid.github.io/ShareXUpload/upload.php",
+  "FileFormName": "sharex",
+  "Arguments": {
+    "secret": "token1"
+  },
+  "ResponseType": "Text",
+  "URL": "https://hayden-droid.github.io/ShareXUpload/i/$json:url$"
+}
