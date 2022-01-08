@@ -1,0 +1,4 @@
+--Thanks to e621 on V3rmillion
+
+
+local a=true;local b=game;local c=b.Workspace;local d=b.Lighting;local e=c.Terrain;e.WaterWaveSize=0;e.WaterWaveSpeed=0;e.WaterReflectance=0;e.WaterTransparency=0;d.GlobalShadows=false;d.FogEnd=9e9;d.Brightness=0;settings().Rendering.QualityLevel="Level01"for f,g in pairs(b:GetDescendants())do if g:IsA("Part")or g:IsA("Union")or g:IsA("MeshPart")or g:IsA("WedgePart")then g.Material="Plastic"g.Reflectance=0 elseif g:IsA("Decal")and a then g.Transparency=1 elseif g:IsA("ParticleEmitter")or g:IsA("Trail")then g.Lifetime=NumberRange.new(0)elseif g:IsA("Part")or g:IsA("Union")or g:IsA("MeshPart")or g:IsA("WedgePart")and g.Transparency<1 and g.Transparency>0.3 then g.Transparency=1 end end;for f,h in pairs(d:GetChildren())do if h:IsA("BlurEffect")or h:IsA("SunRaysEffect")or h:IsA("ColorCorrectionEffect")or h:IsA("BloomEffect")or h:IsA("DepthOfFieldEffect")then h.Enabled=false end end
