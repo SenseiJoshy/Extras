@@ -1,3 +1,12 @@
+--[[
+********************* IMPORTANT *****************************
+Created By: Sensei Joshy#1060
+Our Website: https://senseijoshy.com/
+Our Business Email: info@senseijoshy.com
+Our Discord: https://senseijoshy.com/discord
+************************************************************
+]]--
+
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local UI = Material.Load({
