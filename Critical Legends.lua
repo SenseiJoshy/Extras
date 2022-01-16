@@ -87,6 +87,25 @@ main.Toggle({
     end
 })
 
+main.Toggle({
+    Text = "Spam Equip Shadow Fruit (DMG BUFF)",
+    Enabled = false,
+    Callback = function(v)
+        getgenv().Shadow = v
+        
+        spawn(function()
+            while wait() do
+                if getgenv().Shadow then
+                    pcall(function()
+                        game:GetService("ReplicatedStorage").Remotes.ItemSetup:FireServer("Shadow Fruit")
+                        wait()
+                    end)
+                end
+            end
+        end)
+    end
+})
+
 -- // Material \\ --
 local Mat = UI.New({
     Title = "Materials"
