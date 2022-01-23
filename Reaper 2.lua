@@ -11,7 +11,7 @@ local plr = game.Players.LocalPlayer
 for _, f in pairs(getgc()) do
    local ups = getupvalues(f)
    if #ups == 8 and ups[2] == plr then
-       hookfunction(f, function(...) return math.random(0, 1) end)
+       hookfunction(f, function(...) return math.random(0, 1) end);
    end;
 end;
 
@@ -41,7 +41,7 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
 		Title = "Reaper 2 Script | SenseiJoshy.Com/Discord",
 		Style = 1,
 		SizeX = 350,
-		SizeY = 250,
+		SizeY = 300,
 		Theme = "Dark"
 	})
 
@@ -80,7 +80,7 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
                                 repeat wait() 
                                     local args = {[1] = {["inputType"] = Enum.UserInputType.MouseButton1,["keyCode"] = Enum.KeyCode.Unknown}}
                                     game:GetService("ReplicatedStorage").Remotes.Input:FireServer(unpack(args))
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame - Vector3.new(0,1,0)
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame - Vector3.new(0, getgenv().Distance,0)
                                 until v.Humanoid.Health <= 0 or not getgenv().Autofarm
                             end;
                         end;
@@ -108,6 +108,89 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
                 end);
             end;
         end;
+    })
+
+    main.Slider({
+        Text = "Distance From Mobs",
+        Callback = function(v)
+            getgenv().Distance = v
+        end,
+        Min = 0,
+        Max = 20,
+        Def = 5
+    })
+
+    -- // Player \\ --
+	local plr = UI.New({
+		Title = "P-Farm"
+	})
+
+    local SelectPlayer = {}
+    for i,v in pairs(game.Players:GetPlayers()) do
+        if v:IsA("Player") and not table.find(SelectPlayer, v.Name) then 
+            table.insert(SelectPlayer, v.Name)
+            table.sort(SelectPlayer)
+        end;
+    end;
+
+    local plrdrop = plr.Dropdown({
+        Text = "Select Player To Farm",
+        Options = SelectPlayer,
+        Callback = function(v)
+            getgenv().ChoosenPlayer = v
+        end;
+    })
+
+    game.Players.PlayerAdded:Connect(function(player)
+        if player:IsA("Player") then 
+            table.insert(SelectPlayer, player.Name)
+            plrdrop:SetOptions(SelectPlayer)
+        end;
+    end);
+
+    game.Players.PlayerRemoving:Connect(function(player)
+        if player:IsA("Player") then 
+            for i,v in pairs(SelectPlayer) do 
+                if v == player.Name then 
+                    table.remove(SelectPlayer, i)
+                end;
+            end;
+        end;
+        plrdrop:SetOptions(SelectPlayer)
+    end); 
+
+    plr.Toggle({
+        Text = "Auto Farm Player",
+        Enabled = false,
+        Callback = function(v)
+            getgenv().Autofarm = v
+    
+            while getgenv().Autofarm and wait() do
+                pcall(function()
+                    for i,v in pairs(game:GetService("Workspace").Living:GetChildren()) do
+                        if game.Players.LocalPlayer.Character and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
+                            if v.Name == getgenv().ChoosenPlayer and v.Humanoid.Health > 0 then
+                                repeat wait() 
+                                    local args = {[1] = {["inputType"] = Enum.UserInputType.MouseButton1,["keyCode"] = Enum.KeyCode.Unknown}}
+                                    game:GetService("ReplicatedStorage").Remotes.Input:FireServer(unpack(args))
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame - Vector3.new(0, getgenv().PlayerDis,0)
+                                until v.Humanoid.Health <= 0 or not getgenv().Autofarm
+                            end;
+                        end;
+                    end;
+                end);
+            end;
+        end;
+    })
+
+    plr.Slider({
+        Text = "Distance From Player",
+        Callback = function(v)
+            getgenv().PlayerDis = v
+        end,
+        Min = 0,
+        Max = 20,
+        Def = 5
     })
 
     -- // Teleport
@@ -189,6 +272,20 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
                         end;
                     end;
                 end);
+            end;
+        end;
+    })
+
+    misc.Toggle({
+        Text = "Auto Equip Nigga",
+        Enabled = false,
+        Callback = function(v)
+            getgenv().AutoEquip = v
+
+            while getgenv().AutoEquip and wait(.2) do
+                if game:GetService("Players").LocalPlayer.Status.Weapon.Value == nil then
+                    local a={[1]={["inputType"]=Enum.UserInputType.Keyboard,["keyCode"]=Enum.KeyCode.E}}game:GetService("ReplicatedStorage").Remotes.Input:FireServer(unpack(a))
+                end;
             end;
         end;
     })
