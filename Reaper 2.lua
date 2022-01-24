@@ -235,7 +235,7 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
         Callback = function(v)
             getgenv().PlayerDis = v
         end,
-        Min = 0,
+        Min = -20,
         Max = 20,
         Def = 5
     })
@@ -549,4 +549,3 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
             end;
         end;
     })
-    
