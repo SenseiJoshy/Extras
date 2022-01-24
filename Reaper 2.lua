@@ -7,13 +7,14 @@ Our Discord: https://senseijoshy.com/discord
 ************************************************************
 ]]--
 
-local plr = game.Players.LocalPlayer
-for _, f in pairs(getgc()) do
-   local ups = getupvalues(f)
-   if #ups == 8 and ups[2] == plr then
-       hookfunction(f, function(...) return math.random(0, 1) end);
-   end;
-end;
+local h
+h = hookfunction(getrawmetatable(game.Players.LocalPlayer.Character.HumanoidRootPart.Position).__index, function(p,i)
+   local s = getcallingscript()
+   if s.Name == "ClientHandler" and i:lower() == "magnitude" then
+       return math.random(0, 1)
+   end
+   return h(p,i)
+end)
 
 for i, v in next, getconnections(game.Players.LocalPlayer.Idled) do
     v:Disable();
@@ -21,16 +22,18 @@ end;
 
 local SelectMob = {};
 for i,v in pairs(game:GetService("Workspace").Living:GetChildren()) do
-    if not table.find(SelectMob,v.Name) and not v:FindFirstChild("ClientHandler") then
+    if not table.find(SelectMob,v.Name) and not v:FindFirstChild("ClientHandler") and not v:FindFirstChild("xSIXxAnimationSaves") and not string.match(v.Name,"Masta") and v.Name ~= "Noob" then
         table.insert(SelectMob,v.name)
     end;
 end;
 
 local SelectQuest = {};
-for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+for i,v in pairs(game:GetService("Workspace").NPCs:GetDescendants()) do
     pcall(function()
-        if v:IsA("Model") then
-            table.insert(SelectQuest,v.Dialogue["1"]["2"].Quest.Value)
+        if v.Name == ("Quest") and not v.Parent:FindFirstChild("xSIXxAnimationSaves") then
+            if v.Value ~= "" and v.Value ~= "Test Quest" then
+                table.insert(SelectQuest,v.Value)
+            end;
         end;
     end);
 end;
@@ -40,7 +43,6 @@ game:GetService("RunService").Stepped:Connect(function()
         for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
             if v:IsA("BasePart") and v.CanCollide == true then
                 v.CanCollide = false
-                game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
             end;
         end;
     end;
@@ -49,9 +51,9 @@ end);
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 	local UI = Material.Load({
-		Title = "Reaper 2 Script | SenseiJoshy.Com/Discord",
+		Title = "[Updated] Reaper 2 Script | SenseiJoshy.Com/Discord",
 		Style = 1,
-		SizeX = 350,
+		SizeX = 450,
 		SizeY = 300,
 		Theme = "Dark"
 	})
@@ -111,8 +113,8 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
                 pcall(function()
                     for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
                         if game:GetService("Players").LocalPlayer.PlayerGui.HUD:FindFirstChild("QuestsFrame2") then
-                            if not game:GetService("Players").LocalPlayer.PlayerGui.HUD.QuestsFrame2:FindFirstChild(getgenv().ChosenMob) then wait(2)
-                                game:GetService("ReplicatedStorage").Remotes.TakeQuest:FireServer(getgenv().ChosenMob)
+                            if not game:GetService("Players").LocalPlayer.PlayerGui.HUD.QuestsFrame2:FindFirstChild(getgenv().ChosenQuest) then wait(2)
+                                game:GetService("ReplicatedStorage").Remotes.TakeQuest:FireServer(getgenv().ChosenQuest)
                             end;
                         end;
                     end;
@@ -131,9 +133,43 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
         Def = 5
     })
 
-    -- // Player \\ --
+    -- // Menos \\ --
+	local Men = UI.New({
+		Title = "Menos Farm"
+	})
+
+    Men.Dropdown({
+        Text = "Select Stomp Key",
+        Options = {"One","Two","Three","Four","Five","Six"},
+        Callback = function(v)
+            getgenv().StompKey = v
+        end;
+    })
+
+    Men.Toggle({
+        Text = "Auto Farm For Menos",
+        Enabled = false,
+        Callback = function(v)
+            getgenv().MenosFarm = v
+
+            while getgenv().MenosFarm and wait() do
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = (getgenv().FarmLocation)
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, getgenv().StompKey, false, game); wait(1)
+                local a={[1]={["inputType"]=Enum.UserInputType.MouseButton1,["keyCode"]=Enum.KeyCode.Unknown}}game:GetService("ReplicatedStorage").Remotes.Input:FireServer(unpack(a))
+            end;
+        end;
+    })
+
+    Men.Button({
+        Text = "Set Menos Farm Location",
+        Callback = function()
+            getgenv().FarmLocation = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+        end
+    })
+
+     -- // Player \\ --
 	local plr = UI.New({
-		Title = "P-Farm"
+		Title = "Player Farm"
 	})
 
     local SelectPlayer = {}
@@ -470,5 +506,47 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
     
     UI.Banner({
         Text = "Reaper 2 Script.. Has Load Successfully."
+    })
+    
+    main.Toggle({
+        Text = "Auto Adjust Mobs (MULTI)",
+        Enabled = false,
+        Callback = function(v)
+            if getgenv().ChosenQuest == "Op Killer" and v then
+                getgenv().OPK = true
+                getgenv().AQ = false
+            elseif getgenv().ChosenQuest == "Acquired Taste" and v then
+                getgenv().AQ = true
+                getgenv().OPK = false
+            end;
+            
+            while getgenv().AQ and wait() do    
+            pcall(function()
+            local wtf = game:GetService("Players").LocalPlayer.PlayerGui.HUD.QuestsFrame2["Acquired Taste"].Frame.Objective
+            
+            if string.match(wtf.Text,"Kill 1 Clawed") or string.match(wtf.Text,"Kill 2 Clawed") then
+                    getgenv().ChosenMob = "Clawed Hollow"
+                elseif string.match(wtf.Text,"Kill 1 Winged") or string.match(wtf.Text,"Kill 2 Winged") and string.match(wtf.Text,"Kill 0 Clawed") then
+                    getgenv().ChosenMob = "Winged Hollow"
+                elseif string.match(wtf.Text,"Kill 1 Savage") and string.match(wtf.Text,"Kill 0 Clawed") and string.match(wtf.Text,"Kill 0 Winged") then
+                        getgenv().ChosenMob = "Savage Hollow"
+                    end;
+                end);
+            end;
+            
+            while getgenv().OPK and wait() do
+            pcall(function()
+            local wtf2 = game:GetService("Players").LocalPlayer.PlayerGui.HUD.QuestsFrame2["Op Killer"].Frame.Objective
+        
+                if string.match(wtf2.Text,"Kill 1 Heavy") or string.match(wtf2.Text,"Kill 2 Heavy") then
+                        getgenv().ChosenMob = "Heavy Corrupted Kido Corps"
+                    elseif string.match(wtf2.Text,"Kill 1 Experienced") and string.match(wtf2.Text,"Kill 0 Heavy") then
+                        getgenv().ChosenMob = "Experienced Corrupted Shikai User"
+                    elseif string.match(wtf2.Text,"Kill 3 Corrupted") or string.match(wtf2.Text,"Kill 2 Corrupted") or string.match(wtf2.Text,"Kill 1 Corrupted") and string.match(wtf2.Text,"Kill 0 Experienced") then
+                        getgenv().ChosenMob = "Corrupted Kido Corps"
+                    end;
+                end); 
+            end;
+        end;
     })
     
