@@ -1,5 +1,7 @@
+local char = game.Players.LocalPlayer.Character
+
 local function noclip()
-    for i, v in pairs(chr:GetDescendants()) do
+    for i, v in pairs(char:GetDescendants()) do
         if v:IsA("BasePart") and v.CanCollide == true then
             v.CanCollide = false
         end
