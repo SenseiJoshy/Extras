@@ -176,7 +176,7 @@ spawn(function()
 end)
 
 main.Toggle({
-    Text = "Auto Farm Mobs",
+    Text = "Hide Name Bozos",
     Enabled = false,
     Callback = function(v)
         Settings["HideName"] = v 
@@ -195,12 +195,23 @@ spawn(function()
     end
 end)
 
-main.Button({
-     Text = "Hide Your Bounty Bozo",
-     Callback = function()
-          game.Players.LocalPlayer.Character.Head.Status:Destroy()
-     end;
-});
+main.Toggle({
+    Text = "Hide Your Bounty Bozo",
+    Enabled = false,
+    Callback = function(v)
+        Settings["HideBounty"] = v 
+    end
+})
+
+spawn(function()
+    while wait() do 
+        if Settings.HideBounty then
+            pcall(function()
+                game.Players.LocalPlayer.Character.Head.Status:Destroy()
+            end)
+        end
+    end
+end)
 
 local tele = UI.New({Title = "Teleport"})
 
@@ -348,6 +359,25 @@ spawn(function()
      end
 end)
 
+spawn(function()
+    while wait() do 
+        if Settings.ChestFarm then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Map.Chests:GetChildren()) do
+                    if v:IsA("Part") and v:FindFirstChild("Taken").Value == false then
+                        if Settings.ChestFarm then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                            wait(0.1)
+                            game:service('VirtualInputManager'):SendKeyEvent(true, "T", false, game)
+                            wait(0.3)
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
 misc.Toggle({
      Text = "Fruit/Tool Sniper Bozo",
      Enabled = false,
@@ -390,14 +420,6 @@ spawn(function()
         end
     end
 end)
-
-misc.Toggle({
-    Text = "Fruit/Tool Sniper Bozo",
-    Enabled = false,
-    Callback = function(v)
-        Settings["ToolSniper"] = v 
-    end
-})
 
 misc.Button({
      Text = "Rejoin Server - Current Server",
