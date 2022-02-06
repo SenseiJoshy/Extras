@@ -28,13 +28,13 @@ local stat_levels = {
      "GunLevel",
  }
  
- local quest_table = {}
- for i,v in pairs(workspace:GetDescendants()) do
-     if v:IsA("Part") and string.find(v.Name, "Quest") and v:FindFirstChild("ClickDetector") and v:FindFirstChild("QuestGiver") then 
-         table.insert(quest_table, v.Name)
-     end
- end
- table.sort(quest_table)
+local quest_table = {}
+for i,v in pairs(workspace:GetDescendants()) do
+    if v:IsA("Part") and string.find(v.Name, "Quest") and v:FindFirstChild("ProximityPrompt") and v:FindFirstChild("QuestGiver") then 
+        table.insert(quest_table, v.Name)
+    end
+end
+table.sort(quest_table)
  
  local function upgrade(v)
      local ohInstance1 = game:GetService("Players").LocalPlayer.PlayerValues
@@ -130,6 +130,14 @@ local function findQuest()
      end
 end
 
+local function noclip()
+	for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+		if v:IsA("BasePart") and v.CanCollide == true then
+			v.CanCollide = false
+		end
+	end
+end
+
 main.Toggle({
      Text = "Auto Farm Mobs",
      Enabled = false,
@@ -144,15 +152,15 @@ spawn(function()
             pcall(function()
                 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestsGUI") == nil then 
                     repeat wait()
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame
-                        fireclickdetector(findQuest().ClickDetector)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame * CFrame.new(0,-5,0) * CFrame.Angles(math.rad(90),0,0)
+                        fireproximityprompt(findQuest().ProximityPrompt)
                     until plr.PlayerGui:FindFirstChild("QuestsGUI") or not Settings.autofarm
                 end
 
                 if game:GetService("Players").LocalPlayer.PlayerValues.Quest.Value == 0 and game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestsGUI") then 
                     repeat wait()
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame
-                        fireclickdetector(findQuest().ClickDetector)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame * CFrame.new(0,-5,0) * CFrame.Angles(math.rad(90),0,0)
+                        fireproximityprompt(findQuest().ProximityPrompt)
                     until game:GetService("Players").LocalPlayer.PlayerValues.Quest.Value == 1 or not Settings.autofarm
                 end
                 
@@ -162,16 +170,28 @@ spawn(function()
                             v:Destroy()
                         end
 
-                        if v:IsA('Model') and v.Name == mob_list[Settings.ChosenQuest] and v.Humanoid.Health > 0 then 
+                        if v:IsA('Model') and v.Name == mob_list[Settings.ChosenQuest] and v.Humanoid.Health > 0 and game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestsGUI") then 
                             repeat wait()
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Torso.CFrame
-                                attack()
+                                if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then 
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild("Combat"))
+                                end
+                                game.Players.LocalPlayer.Character:FindFirstChild("Combat"):Activate()
+                                v.HumanoidRootPart.Size = Vector3.new(100,500,100)
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Torso.CFrame * CFrame.new(0,200,0)
                             until not Settings.autofarm or v.Humanoid.Health <= 0 
                         end
                     end
                 end
             end)
         end 
+    end
+end)
+
+spawn(function()
+    while task.wait() do 
+        if Settings.autofarm then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+        end
     end
 end)
 
@@ -187,27 +207,15 @@ spawn(function()
     while wait() do 
         if Settings.HideName then
             pcall(function()
-                if game.Players.LocalPlayer.Character.Head:FindFirstChildWhichIsA("BillboardGui") then 
-                    game.Players.LocalPlayer.Character.Head:FindFirstChildWhichIsA("BillboardGui"):Destroy()
+                for i,v in pairs(game.Players.LocalPlayer.Character.Head:GetChildren()) do
+                    if v:IsA("BillboardGui") and v.Name == "Status" then 
+                        v:FindFirstChild("Bounty"):Destroy()
+                    end
+
+                    if v:IsA("BillboardGui") and v.Name == "NameDisplay" then 
+                        v:FindFirstChild("ImageLabel"):Destroy()
+                    end
                 end
-            end)
-        end
-    end
-end)
-
-main.Toggle({
-    Text = "Hide Your Bounty Bozo",
-    Enabled = false,
-    Callback = function(v)
-        Settings["HideBounty"] = v 
-    end
-})
-
-spawn(function()
-    while wait() do 
-        if Settings.HideBounty then
-            pcall(function()
-                game.Players.LocalPlayer.Character.Head.Status:Destroy()
             end)
         end
     end
@@ -217,7 +225,7 @@ local tele = UI.New({Title = "Teleport"})
 
 local npcs = {}
 for i,v in pairs(game:GetService("Workspace").Map.NPCs:GetChildren()) do
-    if v:IsA("Model") and v:FindFirstChild("ClickDetector") and v:FindFirstChild("Torso") then 
+    if v:IsA("Model") and v:FindFirstChild("Torso") and v.Torso:FindFirstChild("ProximityPrompt")then 
         table.insert(npcs, v.Name) 
     end
 end
@@ -232,7 +240,7 @@ tele.Dropdown({
 
 local shops = {}
 for i,v in pairs(game:GetService("Workspace").Map.Shops:GetChildren()) do
-    if v:IsA("Model") and v:FindFirstChild("ClickDetector") then 
+    if v:IsA("Model") and v:FindFirstChild("RedBox") and v.RedBox:FindFirstChild("ProximityPrompt") then 
         table.insert(shops, v.Name) 
     end
 end
@@ -318,14 +326,6 @@ local misc = UI.New({
      Title = "Misc"
 });
 
-misc.Toggle({
-     Text = "Max Stats Bozo",
-     Enabled = false,
-     Callback = function(v)
-         Settings["InfStats"] = v 
-     end
-})
-
 spawn(function()
      while wait() do 
          if Settings.InfStats then 
@@ -367,9 +367,9 @@ spawn(function()
                     if v:IsA("Part") and v:FindFirstChild("Taken").Value == false then
                         if Settings.ChestFarm then
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-                            wait(0.1)
-                            game:service('VirtualInputManager'):SendKeyEvent(true, "T", false, game)
-                            wait(0.3)
+                            wait(.2)
+                            fireproximityprompt(v:FindFirstChild("ProximityPrompt"))
+                            wait(0.4)
                         end
                     end
                 end
@@ -399,26 +399,6 @@ spawn(function()
              end)
          end
      end
-end)
-
-misc.Toggle({
-    Text = "Money Gen/Easy Money Bozo",
-    Enabled = false,
-    Callback = function(v)
-        Settings["MoneyGen"] = v 
-    end
-})
-
-spawn(function()
-    while wait() do 
-        if Settings.MoneyGen then 
-            game:GetService("ReplicatedStorage").RemoteEvents.DonateBeli:FireServer(.5)
-            if game.Players.LocalPlayer.Backpack:FindFirstChild("MoneyBag") then 
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild("MoneyBag"))
-                game.Players.LocalPlayer.Character:FindFirstChild("MoneyBag"):Activate()
-            end
-        end
-    end
 end)
 
 misc.Button({
