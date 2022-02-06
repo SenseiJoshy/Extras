@@ -1,3 +1,9 @@
+--[[
+Created By: @LeadMarker#1219 & @Sensei Joshy#1060
+Joshy Discord: https://senseijoshy.com/Discord
+Lead Discord: https://discord.gg/8Cj5abGrNv
+]]--
+
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 -- // vars \\ -- 
@@ -133,37 +139,61 @@ main.Toggle({
 })
 
 spawn(function()
-     while wait() do 
-         if Settings.autofarm then
-             pcall(function()
-                 if plr.PlayerGui:FindFirstChild("QuestsGUI") == nil then 
-                     repeat wait()
-                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame
-                         fireclickdetector(findQuest().ClickDetector)
-                     until plr.PlayerGui:FindFirstChild("QuestsGUI") or not Settings.autofarm
-                 end
-                 
-                 if plr.PlayerGui:FindFirstChild("QuestsGUI") then 
-                     for i,v in pairs(game.Workspace.Map.Live:GetChildren()) do 
-                         if v:IsA('Model') and v.Name == mob_list[Settings.ChosenQuest] and v.Humanoid.Health > 0 then 
-                             repeat wait()
-                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Torso.CFrame
-                                 attack()
-                             until not Settings.autofarm or v.Humanoid.Health <= 0 
-                         end
-                     end
-                 end
-             end)
-         end 
-     end
+    while wait() do 
+        if Settings.autofarm then
+            pcall(function()
+                if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestsGUI") == nil then 
+                    repeat wait()
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame
+                        fireclickdetector(findQuest().ClickDetector)
+                    until plr.PlayerGui:FindFirstChild("QuestsGUI") or not Settings.autofarm
+                end
+
+                if game:GetService("Players").LocalPlayer.PlayerValues.Quest.Value == 0 and game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestsGUI") then 
+                    repeat wait()
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = findQuest().CFrame
+                        fireclickdetector(findQuest().ClickDetector)
+                    until game:GetService("Players").LocalPlayer.PlayerValues.Quest.Value == 1 or not Settings.autofarm
+                end
+                
+                if plr.PlayerGui:FindFirstChild("QuestsGUI") then 
+                    for i,v in pairs(game.Workspace.Map.Live:GetChildren()) do
+                        if v.Humanoid.Health <= 0 and v.Name == mob_list[Settings.ChosenQuest] then
+                            v:Destroy()
+                        end
+
+                        if v:IsA('Model') and v.Name == mob_list[Settings.ChosenQuest] and v.Humanoid.Health > 0 then 
+                            repeat wait()
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Torso.CFrame
+                                attack()
+                            until not Settings.autofarm or v.Humanoid.Health <= 0 
+                        end
+                    end
+                end
+            end)
+        end 
+    end
 end)
 
-main.Button({
-     Text = "Hide Your Name Bozo",
-     Callback = function()
-          game.Players.LocalPlayer.Character.Head.NameDisplay:Destroy()
-     end;
-});
+main.Toggle({
+    Text = "Auto Farm Mobs",
+    Enabled = false,
+    Callback = function(v)
+        Settings["HideName"] = v 
+    end
+})
+
+spawn(function()
+    while wait() do 
+        if Settings.HideName then
+            pcall(function()
+                if game.Players.LocalPlayer.Character.Head:FindFirstChildWhichIsA("BillboardGui") then 
+                    game.Players.LocalPlayer.Character.Head:FindFirstChildWhichIsA("BillboardGui"):Destroy()
+                end
+            end)
+        end
+    end
+end)
 
 main.Button({
      Text = "Hide Your Bounty Bozo",
@@ -341,6 +371,34 @@ spawn(function()
      end
 end)
 
+misc.Toggle({
+    Text = "Money Gen/Easy Money Bozo",
+    Enabled = false,
+    Callback = function(v)
+        Settings["MoneyGen"] = v 
+    end
+})
+
+spawn(function()
+    while wait() do 
+        if Settings.MoneyGen then 
+            game:GetService("ReplicatedStorage").RemoteEvents.DonateBeli:FireServer(.5)
+            if game.Players.LocalPlayer.Backpack:FindFirstChild("MoneyBag") then 
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild("MoneyBag"))
+                game.Players.LocalPlayer.Character:FindFirstChild("MoneyBag"):Activate()
+            end
+        end
+    end
+end)
+
+misc.Toggle({
+    Text = "Fruit/Tool Sniper Bozo",
+    Enabled = false,
+    Callback = function(v)
+        Settings["ToolSniper"] = v 
+    end
+})
+
 misc.Button({
      Text = "Rejoin Server - Current Server",
      Callback = function()
@@ -432,7 +490,7 @@ local cred = UI.New({
  })
  
  cred.Button({
-     Text = "Discord Server",
+     Text = "Joshy Discord Server",
      Callback = function()
          if syn then
              syn.request({
@@ -460,6 +518,36 @@ local cred = UI.New({
          end;
      end;
  });
+
+ cred.Button({
+    Text = "Lead Discord Server",
+    Callback = function()
+        if syn then
+            syn.request({
+               Url = "http://127.0.0.1:6463/rpc?v=1",
+               Method = "POST",
+               Headers = {
+                   ["Content-Type"] = "application/json",
+                   ["Origin"] = "https://discord.com"
+               },
+               Body = game:GetService("HttpService"):JSONEncode({
+                   cmd = "INVITE_BROWSER",
+                   args = {
+                       code = "8Cj5abGrNv"
+                   },
+                   nonce = game:GetService("HttpService"):GenerateGUID(false)
+               }),
+            })
+        else 
+                setclipboard("https://discord.gg/8Cj5abGrNv")
+                game.StarterGui:SetCore("SendNotification", {
+                Title = "Please Read!!"; 
+                Text = "Discord Link Copied";
+                Duration = 35; 
+            })
+        end;
+    end;
+});
  
  local creators = {
      "Sensei Joshy#1060",
