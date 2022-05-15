@@ -1,3 +1,4 @@
+--{[Made By:Introvert#1337]}--
 local old_coroutine_wrap;
 old_coroutine_wrap = replaceclosure(coroutine.wrap, newcclosure(function(func, ...)
   if not checkcaller() then
