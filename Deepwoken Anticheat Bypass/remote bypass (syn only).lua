@@ -1,3 +1,4 @@
+--{[Made By:Introvert#1337]}--
 local ui_manager = game:GetService("Players").LocalPlayer.PlayerScripts.UIManager;
 local ui_manager_get_remote = getupvalue(getconnections(game:GetService("TextService").ChildAdded)[1].Function, 2);
 
